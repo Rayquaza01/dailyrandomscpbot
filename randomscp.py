@@ -28,7 +28,7 @@ def main():
     )
     rand = wiki(randomSCP())
     client.create_link("dailyrandomscp", title=rand.title, url=rand.url, state="published",
-                       tags=["scp"], description="Today's random SCP of the day is:" + rand.title)
+                       tags=["scp"], description="Today's random SCP of the day is: " + rand.title)
 
 
 if __name__ == "__main__":
