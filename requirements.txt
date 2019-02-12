@@ -1,0 +1,2 @@
+pytumblr
+git+https://github.com/anqxyr/pyscp
