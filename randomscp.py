@@ -27,7 +27,7 @@ def main():
         creds["oauth_secret"]
     )
     rand = wiki(randomSCP())
-    client.create_link("dailyrandomscp", title=rand.title, url=rand.url, state="private",
+    client.create_link("dailyrandomscp", title=rand.title, url=rand.url, state="published",
                        tags=["scp"], description="Today's random SCP of the day is:" + rand.title)
 
 
