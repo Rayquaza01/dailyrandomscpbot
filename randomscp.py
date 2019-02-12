@@ -9,7 +9,7 @@ def randomSCP():
     with open("scp.txt", "r") as scp:
         choices = scp.read().split("\n")
     choices.pop()  # remove last item, always empty string
-    choice = random.choices(choices)[0]
+    choice = random.choice(choices)
     choices.remove(choice)
     with open("scp.txt", "w") as scp:
         scp.write("\n".join(choices))
