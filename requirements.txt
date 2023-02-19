@@ -1,2 +1,2 @@
 pyscp
-pyperclip
+pytumblr
