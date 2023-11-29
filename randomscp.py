@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import pyscp
-import pytumblr
 import random
 import json
 import argparse
+import pyscp
+import pytumblr
 
 with open("creds.json", "r") as f:
     creds = json.loads(f.read())

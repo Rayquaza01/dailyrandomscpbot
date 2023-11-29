@@ -1,2 +1,2 @@
 #!/bin/bash
-source ./scpbot/bin/activate
+source ./scpbot-3.10/bin/activate

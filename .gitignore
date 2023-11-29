@@ -2,3 +2,4 @@
 *.swo
 Thumbs.db
 creds.json
+scpbot-*/
