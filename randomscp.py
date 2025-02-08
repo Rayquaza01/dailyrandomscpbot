@@ -14,7 +14,7 @@ client = pytumblr.TumblrRestClient(
 )
 
 def randomSCP():
-    num = random.randint(1, 7999)
+    num = random.randint(1, 8999)
     link = "scp-" + str(num).zfill(3)
     return link
 
