@@ -2,19 +2,16 @@
 import random
 import json
 import argparse
+import os
 import pyscp
 import pytumblr
 
-with open("creds.json", "r") as f:
-    creds = json.loads(f.read())
-
 client = pytumblr.TumblrRestClient(
-    creds["consumer_key"],
-    creds["consumer_secret"],
-    creds["oauth_token"],
-    creds["oauth_secret"],
+    os.environ["CONSUMER_KEY"],
+    os.environ["CONSUMER_SECRET"],
+    os.environ["OAUTH_TOKEN"],
+    os.environ["OAUTH_SECRET"],
 )
-
 
 def randomSCP():
     num = random.randint(1, 7999)
@@ -23,7 +20,6 @@ def randomSCP():
 
 
 def main():
-
     wiki = pyscp.wikidot.Wiki("scp-wiki.wikidot.com")
 
     # hack to retry if generates a bad article
@@ -33,7 +29,6 @@ def main():
             title = rand.title
             url = rand.url
         except:
-            print(rand.url + " failed!")
             continue
         break
 
