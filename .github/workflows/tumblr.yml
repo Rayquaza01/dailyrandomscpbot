@@ -1,0 +1,26 @@
+name: Post Daily Random SCP
+
+on:
+    schedule:
+        # midnight every sunday
+        cron: "0 0 * * 0"
+jobs:
+    post:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Python 3.10
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.10"
+
+            - run: pip3 install -r requirements.txt
+
+            # generate 7 random scps and queue them
+            - run: python3 randomscp.py 7
+              env:
+                  CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+                  CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+                  OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
+                  OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }}
