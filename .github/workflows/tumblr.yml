@@ -1,9 +1,10 @@
 name: Post Daily Random SCP
 
 on:
+    workflow_dispatch:
     schedule:
-        # midnight every sunday
-        - cron: "0 0 * * 0"
+        # 00:15 every sunday
+        - cron: "15 0 * * 0"
 jobs:
     post:
         name: Daily Random SCP Workflow
