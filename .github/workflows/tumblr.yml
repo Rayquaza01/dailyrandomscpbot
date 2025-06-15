@@ -27,11 +27,11 @@ jobs:
                   CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
                   OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
                   OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }}
-    keepalive-job:
-        name: Keepalive Workflow
-        runs-on: ubuntu-latest
-        permissions:
-            actions: write
-        steps:
-            - uses: actions/checkout@v4
-            - uses: gautamkrishnar/keepalive-workflow@v2
+    # keepalive-job:
+    #     name: Keepalive Workflow
+    #     runs-on: ubuntu-latest
+    #     permissions:
+    #         actions: write
+    #     steps:
+    #         - uses: actions/checkout@v4
+    #         - uses: gautamkrishnar/keepalive-workflow@v2
