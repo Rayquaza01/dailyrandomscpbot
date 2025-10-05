@@ -58,12 +58,15 @@ def refresh():
     for panel in soup.find_all(class_="content-panel"):
         for item in panel.find_all("li"):
             link = item.find("a")
+            href = link.get("href")
             # include all links in <li> for joke scps
-            articles.append({
-                "series": "J",
-                "title": item.text,
-                "link": link.get("href"),
-            })
+            # skip themes and joke scp tales hub
+            if not re.match(r"^\/theme:", href) and href != "/joke-scps-tales-edition":
+                articles.append({
+                    "series": "J",
+                    "title": item.text,
+                    "link": href,
+                })
 
     with open("scps.json", "w") as f:
         f.write(json.dumps(articles))
