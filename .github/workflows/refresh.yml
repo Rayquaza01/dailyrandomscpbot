@@ -1,0 +1,32 @@
+name: Refresh SCPs
+
+on:
+    workflow_dispatch:
+    schedule:
+        # 00:15 at the start of every month
+        - cron: "15 0 1 * *"
+jobs:
+    refresh:
+        name: Daily Random SCP Workflow
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: "Set up Python"
+              uses: actions/setup-python@v5
+              with:
+                  python-version-file: ".python-version"
+
+            - name: "Set up uv"
+              uses: astral-sh/setup-uv@v6
+
+            - name: "Install Dependencies"
+              run: uv sync --locked
+
+            # generate 7 random scps and queue them
+            - run: uv run main.py --refresh
+
+            - uses: stefanzweifel/git-auto-commit-action@v6
