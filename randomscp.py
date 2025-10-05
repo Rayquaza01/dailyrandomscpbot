@@ -32,7 +32,7 @@ def main():
         break
 
     post = "# Today's random SCP of the day is [" + title + "](" + url + ")"
-    # client.create_text("dailyrandomscp", state="queue", tags=["scp"], body=post, format="markdown")
+    client.create_text("dailyrandomscp", state="queue", tags=["scp"], body=post, format="markdown")
     print(post)
 
 
