@@ -1,2 +1,0 @@
-git+https://github.com/Rayquaza01/pyscp
-pytumblr==0.1.2
