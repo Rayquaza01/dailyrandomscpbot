@@ -7,7 +7,10 @@ import re
 import requests
 from bs4 import BeautifulSoup
 import pytumblr
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--refresh", action="store_true")
