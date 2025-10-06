@@ -94,13 +94,17 @@ def main():
         if args.series:
             articles = list(filter(lambda x: x["series"] == args.series, articles))
 
-        for _ in range(args.count[0]):
+        if args.count is None:
+            count = 1
+        else:
+            count = args.count[0]
+
+        for _ in range(count):
             scp = random.choice(articles)
             post = f"# Today's random SCP of the day is [{scp['title']}](https://scp-wiki.wikidot.com{scp['link']})"
             print(post)
             if client:
                 client.create_text("dailyrandomscp", state="queue", tags=["scp"], body=post, format="markdown")
-
 
 
 if __name__ == "__main__":
