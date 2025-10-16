@@ -33,6 +33,11 @@ SCP_INDEX = [
 ]
 JOKE_INDEX = "joke-scps"
 
+TEMPLATES = [
+    "# Today's random SCP is [{}](https://scp-wiki.wikidot.com{})",
+    "# The SCP of the day is [{}](https://scp-wiki.wikidot.com{})"
+]
+
 
 articles = []
 
@@ -101,7 +106,7 @@ def main():
 
         for _ in range(count):
             scp = random.choice(articles)
-            post = f"# Today's random SCP of the day is [{scp['title']}](https://scp-wiki.wikidot.com{scp['link']})"
+            post = random.choice(TEMPLATES).format(scp["title"], scp["link"])
             print(post)
             if client:
                 client.create_text("dailyrandomscp", state="queue", tags=["scp"], body=post, format="markdown")
