@@ -30,6 +30,7 @@ SCP_INDEX = [
     "scp-series-7",
     "scp-series-8",
     "scp-series-9",
+    "scp-series-10",
 ]
 JOKE_INDEX = "joke-scps"
 
