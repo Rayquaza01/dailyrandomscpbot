@@ -33,6 +33,8 @@ SCP_INDEX = [
     "scp-series-10",
 ]
 JOKE_INDEX = "joke-scps"
+LOST_INDEX = "lost-scp-series"
+EXPLAINED_INDEX = "scp-ex"
 
 TEMPLATES = [
     "# Today's random SCP is [{}](https://scp-wiki.wikidot.com{})",
@@ -51,14 +53,15 @@ def refresh():
         soup = BeautifulSoup(res.text, "html.parser")
         for item in soup.find(class_="content-panel").find_all("li"):
             link = item.find("a")
+            href = link.get("href")
             # invalid scps have the "newpage" class.
             # only include a page if it does not have a class
             # also, links must match /scp-(numbers)
-            if not link.has_attr("class") and re.match(r"^\/scp-\d+$", link.get("href")):
+            if not link.has_attr("class") and re.match(r"^\/scp-\d+$", href):
                 articles.append({
                     "series": str(idx + 1),
                     "title": item.text,
-                    "link": link.get("href"),
+                    "link": href,
                 })
 
     # include joke scps
@@ -76,6 +79,36 @@ def refresh():
                     "title": item.text,
                     "link": href,
                 })
+
+    # include explained scps
+    res = requests.get("https://scp-wiki.wikidot.com/" + EXPLAINED_INDEX)
+    soup = BeautifulSoup(res.text, "html.parser")
+    for item in soup.find(class_="content-panel").find_all("li"):
+        link = item.find("a")
+        href = link.get("href")
+        # include all links in <li> for explained scps
+        # skip tales hub
+        if href != "/explained-scps-tales-edition":
+            articles.append({
+                "series": "EX",
+                "title": item.text,
+                "link": href,
+            })
+
+    res = requests.get("https://scp-wiki.wikidot.com/" + LOST_INDEX)
+    soup = BeautifulSoup(res.text, "html.parser")
+    for item in soup.find(class_="content-panel").find_all("li"):
+        link = item.find("a")
+        href = link.get("href")
+        # invalid scps have the "newpage" class.
+        # only include a page if it does not have a class
+        # also, links must match /scp-l(numbers)
+        if not link.has_attr("class") and re.match(r"^\/scp-l\d+$", href):
+            articles.append({
+                "series": "L",
+                "title": item.text,
+                "link": href,
+            })
 
     with open("scps.json", "w") as f:
         f.write(json.dumps(articles))
